@@ -1,13 +1,14 @@
+# run.py
+import os
 from app import create_app
 from flask_cors import CORS
-import os
 
 app = create_app()
 
-# Enable CORS globally
+# Apply CORS to the app
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Only used for local testing
 if __name__ == "__main__":
+    # Use Render's PORT env variable, default to 5000 locally
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
